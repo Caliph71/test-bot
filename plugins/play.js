@@ -19,7 +19,11 @@ let handler = async (m, { conn, command, text, isPrems, isOwner }) => {
   let _thumb = {}
   try { if (isVideo) _thumb = { thumbnail: await (await fetch(thumb)).buffer() } }
   catch (e) { }
-  if (!isLimit) conn.sendMessage(m.chat, await getBuffer(dl_link), audio, { quoted: m, mimetype: 'audio/mp4'})
+  if (!isLimit) conn.sendFile(m.chat, dl_link, title + '.mp' + (3 + /2$/.test(command)), `
+*Title:* ${title}
+*Filesize:* ${filesizeF}
+*Source:* ${vid.url}
+`.trim(), m, false, _thumb || {})
 }
 handler.help = ['play', 'play2'].map(v => v + ' <pencarian>')
 handler.tags = ['downloader']
@@ -29,23 +33,3 @@ handler.exp = 0
 handler.limit = true
 
 module.exports = handler
-
-const getBuffer = async (url, options) => {
-const axios = require('axios')
-	try {
-		options ? options : {}
-		const res = await axios({
-			method: "get",
-			url,
-			headers: {
-				'DNT': 1,
-				'Upgrade-Insecure-Request': 1
-			},
-			...options,
-			responseType: 'arraybuffer'
-		})
-		return res.data
-	} catch (e) {
-		console.log(`Error : ${e}`)
-	}
-}
