@@ -5,6 +5,7 @@ let handler  = async (m, { conn, args }) => {
     let q = m.quoted ? m.quoted : m
       let img = await q.download()
       convert = await toVideo(img, 'webp')
+      conn.sendMessage(m.chat, convert, MessageType.video, { quoted: m})
     } catch {
     m.reply('Conversation failed')
    }
