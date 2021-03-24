@@ -15,7 +15,7 @@ let handler = async (m, { conn, text, usedPrefix }) => {
             tld: "cn",
             to: `${to}`,
         })
-        m.reply(m.chat, `${text}\n\nTerjemahan: ` + result[0])
+        m.reply(`${text}\n\nTerjemahan: ` + result[0])
     } catch (e) {
         m.reply('_Error!_')
     }
