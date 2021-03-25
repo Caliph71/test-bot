@@ -7,9 +7,7 @@ let handler = async (m, { conn, args }) => {
   let json = await res.json()
   conn.sendFile(m.chat, json.result.url, 'tiktok.mp4', `
 _*Username:*_ @${json.result.username}
-`.trim(), m, false, {
-    thumbnail
-  })
+`.trim(), m, false)
 }
 handler.help = ['tiktok'].map(v => v + ' <url>')
 handler.tags = ['downloader']
