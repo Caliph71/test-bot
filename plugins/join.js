@@ -1,5 +1,5 @@
 let handler = async (m, { conn, args }) => {
-  if (args.length == 0) m.reply('Linknya mana kak')
+  if (args.length == 0) return m.reply('Linknya mana kak')
   pe = await conn.joinvialink(args.join(' '))
   conn.reply(pe.gid `Hello i am Bot, I was invited by ${conn.getName(m.sender)}`, false)
 
